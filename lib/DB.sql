@@ -4,8 +4,6 @@ CREATE DATABASE `JAM`;
 
 USE `JAM`;
 
-
-
 CREATE TABLE article (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
@@ -14,6 +12,7 @@ CREATE TABLE article (
     `body` TEXT NOT NULL
 );
 
+DROP TABLE article;
 
 SHOW TABLES;
 DESC article;
@@ -26,3 +25,8 @@ title = CONCAT('제목',RAND()),
 
 SELECT *
 FROM article;
+
+UPDATE article
+SET updateDate = NOW(),
+title = '제목2'
+WHERE id = 2;
