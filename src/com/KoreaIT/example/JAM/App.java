@@ -199,7 +199,7 @@ public class App {
 			System.out.println("번호   /   제목");
 
 			for (Article article : articles) {
-				System.out.printf("%4d   /   %s\n", article.id, article.title);
+				System.out.printf("%d   /   %s\n", article.id, article.title);
 			}
 		}
 
