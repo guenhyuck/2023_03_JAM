@@ -79,8 +79,31 @@ public class App {
 					System.out.println("아이디를 입력해주세요");
 					continue;
 				}
+				
+				SecSql sql = new SecSql();
+
+				sql.append("SELECT COUNT(*) > 0");
+				sql.append("FROM `member`");
+				sql.append("WHERE loginID =?", loginId);
+
+
+				
+				boolean isLoginIdDup = DBUtil.selectRowBooleanValue(conn, sql);
+				
+				if(isLoginIdDup) {
+					System.out.println(loginId + "는(은) 이미 사용중 입니다");
+					 continue;
+				}
+				
+				
+				
+				
+				
 				break;
 			}
+			
+			
+			
 
 			while (true) {
 				System.out.printf("비밀번호 : ");
@@ -113,6 +136,13 @@ public class App {
 					break;
 				}
 			}
+			
+			
+			
+			
+			
+			
+			
 
 			while (true) {
 				System.out.printf("이름 : ");
