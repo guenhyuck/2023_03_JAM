@@ -1,32 +1,45 @@
 package com.KoreaIT.example.JAM.controller;
-
 import java.util.List;
 import java.util.Map;
-
 import com.KoreaIT.example.JAM.container.Container;
 import com.KoreaIT.example.JAM.dto.Article;
 import com.KoreaIT.example.JAM.service.ArticleService;
 import com.KoreaIT.example.JAM.util.util;
-
 public class ArticleController extends Controller {
-
 	private ArticleService articleService;
-
 	public ArticleController() {
 		articleService = Container.articleService;
 	}
 
 	public void doWrite(String cmd) {
+		if (Container.session.isLogined() == false) {
+			System.out.println("로그인 후 이용해주세요");
+			return;
+		}
 
 		System.out.println("==게시물 작성==");
 		System.out.printf("제목 : ");
 		String title = sc.nextLine();
+
+    
+          
+            
+    
+
+          
+          
+            
+    
+
+          
+    
+    @@ -52,6 +57,11 @@ public void showDetail(String cmd) {
+  
 		System.out.printf("내용 : ");
 		String body = sc.nextLine();
 		int id = articleService.doWrite(title, body);
 		System.out.println(id + "번 글이 생성 되었습니다");
 	}
-
 	public void showDetail(String cmd) {
 		int id = Integer.parseInt(cmd.split(" ")[2]);
 		System.out.println("==게시물 상세보기==");
@@ -44,8 +57,24 @@ public class ArticleController extends Controller {
 	}
 
 	public void doDelete(String cmd) {
+
+		if (Container.session.isLogined() == false) {
+			System.out.println("로그인 후 이용해주세요");
+			return;
+		}
 		int id = Integer.parseInt(cmd.split(" ")[2]);
+
 		System.out.println("==게시물 삭제==");
+
+    
+        
+          
+    
+
+        
+    
+    @@ -70,6 +80,11 @@ public void doDelete(String cmd) {
+  
 		int articlesCount = articleService.getArticlesCount(id);
 		if (articlesCount == 0) {
 			System.out.println(id + "번 글은 존재하지 않습니다");
@@ -56,8 +85,24 @@ public class ArticleController extends Controller {
 	}
 
 	public void doModify(String cmd) {
+		if (Container.session.isLogined() == false) {
+			System.out.println("로그인 후 이용해주세요");
+			return;
+		}
+
 		int id = Integer.parseInt(cmd.split(" ")[2]);
+
 		int articlesCount = articleService.getArticlesCount(id);
+
+    
+          
+            
+    
+
+          
+    
+    
+  
 		if (articlesCount == 0) {
 			System.out.println(id + "번 글은 존재하지 않습니다");
 			return;
@@ -70,7 +115,6 @@ public class ArticleController extends Controller {
 		articleService.doModify(id, title, body);
 		System.out.println(id + "번 글이 수정 되었습니다");
 	}
-
 	public void showList(String cmd) {
 		System.out.println("==게시물 목록==");
 		List<Article> articles = articleService.getArticlesCount();

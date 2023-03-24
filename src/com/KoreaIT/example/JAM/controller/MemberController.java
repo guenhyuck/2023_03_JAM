@@ -52,8 +52,7 @@ public class MemberController extends Controller {
 
 			System.out.println(member.name + " 회원님, 환영합니다");
 
-			Container.session.loginedMember = member;
-			Container.session.loginedMemberId = member.id;
+			Container.session.login(member);
 
 			break;
 		}
@@ -61,9 +60,15 @@ public class MemberController extends Controller {
 	}
 
 	public void doJoin(String cmd) {
+		if (Container.session.isLogined() == true) {
+			System.out.println("로그아웃 후 이용해주세요");
+			return;
+		}
+
 		String loginId = null;
 		String loginPw = null;
 		String loginPwConfirm = null;
+
 		String name = null;
 		System.out.println("==회원 가입==");
 		while (true) {
@@ -117,14 +122,22 @@ public class MemberController extends Controller {
 		}
 		int id = memberService.doJoin(loginId, loginPw, name);
 		System.out.println(name + " 회원님, 가입 되었습니다");
-
 	}
 
 	public void showProfile(String cmd) {
-		if (Container.session.loginedMemberId == -1) {
+		if (Container.session.isLogined() == false) {
 			System.out.println("로그인 상태가 아닙니다");
 		} else {
 			System.out.println(Container.session.loginedMember);
+		}
+	}
+
+	public void logout(String cmd) {
+		if (Container.session.isLogined() == false) {
+			System.out.println("로그인 후 이용해주세요");
+			return;
+		} else {
+			Container.session.logout();
 		}
 	}
 

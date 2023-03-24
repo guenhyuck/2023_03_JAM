@@ -25,13 +25,9 @@ public class App {
 			String url = "jdbc:mysql://127.0.0.1:3306/JAM?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull";
 			try {
 				conn = DriverManager.getConnection(url, "root", "");
-
 				Container.conn = conn;
-
 				int actionResult = action(cmd);
-
 				if (actionResult == -1) {
-
 					System.out.println("프로그램을 종료합니다");
 					break;
 				}
@@ -54,17 +50,20 @@ public class App {
 			System.out.println("프로그램을 종료합니다");
 			return -1;
 		}
+
 		MemberController memberController = Container.memberController;
 		ArticleController articleController = Container.articleController;
 
-		if (cmd.equals("member login")) {
+		if (cmd.equals("member logout")) {
+			memberController.logout(cmd);
+		} else if (cmd.equals("member login")) {
 			memberController.login(cmd);
 		} else if (cmd.equals("member profile")) {
 			memberController.showProfile(cmd);
+
 		} else if (cmd.equals("member join")) {
 			memberController.doJoin(cmd);
 		} else if (cmd.equals("article write")) {
-
 			articleController.doWrite(cmd);
 		} else if (cmd.startsWith("article detail ")) {
 			articleController.showDetail(cmd);
