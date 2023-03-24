@@ -12,7 +12,6 @@ public class MemberController extends Controller {
 	}
 
 	public void login(String cmd) {
-
 		String loginId = null;
 		String loginPw = null;
 		System.out.println("==로그인==");
@@ -33,13 +32,11 @@ public class MemberController extends Controller {
 		Member member = memberService.getMemberByLoginId(loginId);
 		int maxTryCount = 3;
 		int tryCount = 0;
-
 		while (true) {
 			if (tryCount >= maxTryCount) {
 				System.out.println("비밀번호를 확인하고 다시 입력해주세요");
 				break;
 			}
-
 			System.out.printf("비밀번호 : ");
 			loginPw = sc.nextLine().trim();
 			if (loginPw.length() == 0) {
@@ -52,9 +49,15 @@ public class MemberController extends Controller {
 				System.out.println("비밀번호가 일치하지 않습니다");
 				continue;
 			}
+
 			System.out.println(member.name + " 회원님, 환영합니다");
+
+			Container.session.loginedMember = member;
+			Container.session.loginedMemberId = member.id;
+
 			break;
 		}
+
 	}
 
 	public void doJoin(String cmd) {
@@ -114,5 +117,15 @@ public class MemberController extends Controller {
 		}
 		int id = memberService.doJoin(loginId, loginPw, name);
 		System.out.println(name + " 회원님, 가입 되었습니다");
+
 	}
+
+	public void showProfile(String cmd) {
+		if (Container.session.loginedMemberId == -1) {
+			System.out.println("로그인 상태가 아닙니다");
+		} else {
+			System.out.println(Container.session.loginedMember);
+		}
+	}
+
 }
