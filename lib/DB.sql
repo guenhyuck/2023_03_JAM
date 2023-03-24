@@ -2,6 +2,8 @@ DROP DATABASE IF EXISTS `JAM`;
 CREATE DATABASE `JAM`;
 USE `JAM`;
 # article 테이블 생성
+DROP TABLE article;
+
 CREATE TABLE article(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
@@ -10,6 +12,8 @@ CREATE TABLE article(
     `body` TEXT NOT NULL
 );
 # member 테이블 생성
+DROP TABLE `member`;
+
 CREATE TABLE `member`(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
@@ -68,3 +72,10 @@ updateDate = NOW(),
 memberId = 1,
 title = CONCAT('TestTitle ',RAND()),
 `body` = CONCAT('TestBody ',RAND());
+######################################################################
+#작성자 이름이 나오도록
+
+SELECT `name`,a.id,a.title
+FROM article AS a
+INNER JOIN `member` AS b
+ON a.id = b.id;
