@@ -18,7 +18,6 @@ public class ArticleService {
 	}
 
 	public Map<String, Object> getArticleById(int id) {
-
 		return articleDao.getArticleById(id);
 	}
 
@@ -37,4 +36,9 @@ public class ArticleService {
 	public List<Article> getArticlesCount() {
 		return articleDao.getArticles();
 	}
+
+	public void increaseHit(int id) {
+		articleDao.increaseHit(id);
+	}
+
 }
