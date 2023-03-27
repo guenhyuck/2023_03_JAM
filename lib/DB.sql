@@ -45,8 +45,31 @@ INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
-title = CONCAT('제목 ',RAND()),
-`body` = CONCAT('내용 ',RAND());
+title = '제목 1',
+`body` = '내용 1';
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+title = '제목 2',
+`body` = '내용 2';
+
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+title = '제목 3',
+`body` = '내용 3';
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+title = '제목 4',
+`body` = '내용 4';
+
 
 SELECT * 
 FROM article;

@@ -19,19 +19,16 @@ public class ArticleController extends Controller {
 			System.out.println("로그인 후 이용해주세요");
 			return;
 		}
-
 		System.out.println("==게시물 작성==");
 		System.out.printf("제목 : ");
 		String title = sc.nextLine();
 		System.out.printf("내용 : ");
 		String body = sc.nextLine();
-		
+
 		int memberId = Container.session.loginedMemberId;
-		
-		
-		int id = articleService.doWrite(memberId,title, body);
-		
-		
+
+		int id = articleService.doWrite(memberId, title, body);
+
 		System.out.println(id + "번 글이 생성 되었습니다");
 	}
 
@@ -47,20 +44,19 @@ public class ArticleController extends Controller {
 		System.out.println("번호 : " + article.id);
 		System.out.println("작성날짜 : " + util.getNowDateTimeStr(article.regDate));
 		System.out.println("수정날짜 : " + util.getNowDateTimeStr(article.updateDate));
+		System.out.println("작성자 : " + article.extra__writer);
 		System.out.println("제목 : " + article.title);
 		System.out.println("내용 : " + article.body);
+
 	}
 
 	public void doDelete(String cmd) {
-
 		if (Container.session.isLogined() == false) {
 			System.out.println("로그인 후 이용해주세요");
 			return;
 		}
 		int id = Integer.parseInt(cmd.split(" ")[2]);
-
 		System.out.println("==게시물 삭제==");
-
 		int articlesCount = articleService.getArticlesCount(id);
 		if (articlesCount == 0) {
 			System.out.println(id + "번 글은 존재하지 않습니다");
@@ -75,11 +71,8 @@ public class ArticleController extends Controller {
 			System.out.println("로그인 후 이용해주세요");
 			return;
 		}
-
 		int id = Integer.parseInt(cmd.split(" ")[2]);
-
 		int articlesCount = articleService.getArticlesCount(id);
-
 		if (articlesCount == 0) {
 			System.out.println(id + "번 글은 존재하지 않습니다");
 			return;
@@ -100,9 +93,13 @@ public class ArticleController extends Controller {
 			System.out.println("게시글이 없습니다");
 			return;
 		}
-		System.out.println("번호   /   제목");
+
+		System.out.println("번호   /   작성자   /   제목");
+
 		for (Article article : articles) {
-			System.out.printf("%4d   /   %s\n", article.id, article.title);
+			System.out.printf("%4d   /     %s   /   %s\n", article.id, article.extra__writer, article.title);
 		}
+
 	}
+
 }
