@@ -1,4 +1,5 @@
 package com.KoreaIT.example.JAM.dao;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -6,9 +7,11 @@ import com.KoreaIT.example.JAM.container.Container;
 import com.KoreaIT.example.JAM.dto.Article;
 import com.KoreaIT.example.JAM.util.DBUtil;
 import com.KoreaIT.example.JAM.util.SecSql;
+
 public class ArticleDao {
 	public ArticleDao() {
 	}
+
 	public int doWrite(int memberId, String title, String body) {
 		SecSql sql = new SecSql();
 		sql.append("INSERT INTO article");
@@ -22,20 +25,6 @@ public class ArticleDao {
 		return DBUtil.insert(Container.conn, sql);
 	}
 
-    
-          
-            
-    
-
-          
-          
-            
-    
-
-          
-    
-    @@ -73,6 +74,49 @@ public void doModify(int id, String title, String body) {
-  
 	public Article getArticleById(int id) {
 		SecSql sql = new SecSql();
 		sql.append("SELECT A.*, M.name AS extra__writer");
@@ -49,6 +38,7 @@ public class ArticleDao {
 		}
 		return new Article(articleMap);
 	}
+
 	public int getArticlesCount(int id) {
 		SecSql sql = new SecSql();
 		sql.append("SELECT COUNT(*)");
@@ -56,12 +46,14 @@ public class ArticleDao {
 		sql.append("WHERE id = ?", id);
 		return DBUtil.selectRowIntValue(Container.conn, sql);
 	}
+
 	public void doDelete(int id) {
 		SecSql sql = new SecSql();
 		sql.append("DELETE FROM article");
 		sql.append("WHERE id = ?", id);
 		DBUtil.delete(Container.conn, sql);
 	}
+
 	public void doModify(int id, String title, String body) {
 		SecSql sql = new SecSql();
 		sql.append("UPDATE article");
@@ -118,16 +110,6 @@ public class ArticleDao {
 	public List<Article> getArticles() {
 		SecSql sql = new SecSql();
 
-
-    
-          
-            
-    
-
-          
-    
-    
-  
 		sql.append("SELECT A.*, M.name AS extra__writer");
 		sql.append("FROM article AS A");
 		sql.append("INNER JOIN `member` AS M");
@@ -140,6 +122,7 @@ public class ArticleDao {
 		}
 		return articles;
 	}
+
 	public void increaseHit(int id) {
 		SecSql sql = new SecSql();
 		sql.append("UPDATE article");
