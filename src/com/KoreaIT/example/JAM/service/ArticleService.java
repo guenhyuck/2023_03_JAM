@@ -17,7 +17,7 @@ public class ArticleService {
 		return articleDao.doWrite(memberId, title, body);
 	}
 
-	public Map<String, Object> getArticleById(int id) {
+	public Article getArticleById(int id) {
 		return articleDao.getArticleById(id);
 	}
 
@@ -40,5 +40,4 @@ public class ArticleService {
 	public void increaseHit(int id) {
 		articleDao.increaseHit(id);
 	}
-
 }
